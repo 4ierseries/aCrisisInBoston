@@ -1323,7 +1323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aca57b963ef4175808318b98b46613d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  input: 
+  input: insert dialogue later ;
 --- !u!1 &1911840748
 GameObject:
   m_ObjectHideFlags: 0

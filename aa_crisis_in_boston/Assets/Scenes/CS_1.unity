@@ -1324,6 +1324,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: Hello? Who is this?
+  cutsceneIndexes: 010000000200000003000000
+  abandonedHouseIndex: 4
 --- !u!1 &1911840748
 GameObject:
   m_ObjectHideFlags: 0

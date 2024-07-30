@@ -42,19 +42,21 @@ public class NewDialogue : MonoBehaviour
             
             if (SceneManager.GetActiveScene().name == "CS_1")
             {
-                Debug.Log("Switch to cutscene 2");
                 SceneManager.LoadScene("CS_2");
             }
             
             if (SceneManager.GetActiveScene().name == "CS_2")
             {
-                Debug.Log("Switch to cutscene 3");
                 SceneManager.LoadScene("CS_3");
             }
             
             if (SceneManager.GetActiveScene().name == "CS_3")
             {
-                Debug.Log("Switch to abandoned house platformer level");
+                SceneManager.LoadScene("CS_4");
+            }
+            
+            if (SceneManager.GetActiveScene().name == "CS_4")
+            {
                 SceneManager.LoadScene("ABANDONED_HOUSE");
             }
             
@@ -78,24 +80,6 @@ public class NewDialogue : MonoBehaviour
 
     private void OnDialogueComplete()
     {
-        Debug.Log("Dialogue has ended.");
         dialogueCompleted = true;
     }
 }
-
-    /*
-    void Update()
-    {
-        bool start = true;
-        if (Input.GetKeyDown(KeyCode.Return) && start == true)
-        {
-          StartCoroutine(WriteText(input, textHolder));
-          start = false;
-        }
-
-        if (start == false)
-        {
-            Debug.Log("does this work");
-        }
-    }
-    */

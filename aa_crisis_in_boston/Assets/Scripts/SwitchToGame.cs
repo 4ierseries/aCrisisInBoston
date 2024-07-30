@@ -10,26 +10,48 @@
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI; // For UI elements
 using System.Collections; // For IEnumerator and coroutines
 
-namespace Switch
-{
 public class SwitchToGame : MonoBehaviour
 {
-    void Update()
+
+    private bool starter = false; // is set to true after the 3 seconds pass
+    public GameObject canvasControl;
+    void Start()
     {
-        if (SceneManager.GetActiveScene().name == "TRAIN_STATION")
+        starter = false;
+        
+        // Hide the Canvas initially 
+        canvasControl.SetActive(false);
+        
+        // wait and then show
+        if (starter == false)
         {
-            StartCoroutine(WaitToSwitch());
-            gameObject.SetActive(false);
+            StopAllCoroutines();
+            StartCoroutine(WaitThreeSeconds());
         }
     }
 
-    private IEnumerator WaitToSwitch()
+    void Update()
     {
-        // Wait for a few seconds
+        if (Input.GetKeyDown("p") && (canvasControl != null))
+        {
+            StopAllCoroutines();
+            StartCoroutine(WaitOneSecond());
+            SceneManager.LoadScene("CS_1");
+        }
+    }
+    
+    protected IEnumerator WaitThreeSeconds()
+    {
+        yield return new WaitForSeconds(3);
+        canvasControl.SetActive(true);
+        starter = true;
+    }
+    
+    protected IEnumerator WaitOneSecond()
+    {
         yield return new WaitForSeconds(1);
     }
-}
+
 }

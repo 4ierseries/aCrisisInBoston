@@ -1226,7 +1226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74cc9709c51f4011ba8636d6431cd558, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  input: What? Is this a prank? *call cuts*
+  input: Huh?!! Is this a prank? *call cuts*
 --- !u!114 &1792300135
 MonoBehaviour:
   m_ObjectHideFlags: 0

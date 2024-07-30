@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Scene 1.unity
+    path: Assets/Scenes/TRAIN_STATION.unity
     guid: eb3673dd036cf4a8ab6a86d3d52f32e9
   - enabled: 1
     path: Assets/Scenes/Templates/CUTSCENE T.unity

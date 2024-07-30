@@ -1,3 +1,5 @@
+// this script is for switching to the game from the title screen
+// add a fully responsive menu soon
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

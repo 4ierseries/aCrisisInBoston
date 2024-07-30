@@ -1,3 +1,5 @@
+// this script handles all the dialogue scenes
+// because of how lines 39-53 work this needs to be manually updated each time a new cutscene is added
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -33,22 +35,32 @@ public class NewDialogue : MonoBehaviour
             StartCoroutine(WriteText(input, textHolder, OnDialogueComplete));
         }
         else if (dialogueCompleted)
-        {
+        { 
+            // ----------------
+            // CUTSCENE SWITCHING
+            // ------------------
+            
             if (SceneManager.GetActiveScene().name == "CS_1")
             {
                 Debug.Log("Switch to cutscene 2");
                 SceneManager.LoadScene("CS_2");
             }
+            
             if (SceneManager.GetActiveScene().name == "CS_2")
             {
                 Debug.Log("Switch to cutscene 3");
                 SceneManager.LoadScene("CS_3");
             }
+            
             if (SceneManager.GetActiveScene().name == "CS_3")
             {
                 Debug.Log("Switch to abandoned house platformer level");
                 SceneManager.LoadScene("ABANDONED_HOUSE");
             }
+            
+            // ----------------
+            // CUTSCENE SWITCHING END
+            // ------------------
 
         }
     }

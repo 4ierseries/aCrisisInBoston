@@ -1,3 +1,5 @@
+// this script is for the main character animations.
+// this is applied on the character prefab so won't need further updates (I think)
 using System;
 using UnityEngine;
 

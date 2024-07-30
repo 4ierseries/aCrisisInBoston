@@ -1223,10 +1223,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1792300132}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74cc9709c51f4011ba8636d6431cd558, type: 3}
+  m_Script: {fileID: 11500000, guid: 9aca57b963ef4175808318b98b46613d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  input: Huh?!! Is this a prank? *call cuts*
+  input: What? Is this a prank? Call cuts.
 --- !u!114 &1792300135
 MonoBehaviour:
   m_ObjectHideFlags: 0

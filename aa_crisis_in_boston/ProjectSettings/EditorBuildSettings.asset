@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/CS_3.unity
     guid: c6311cfc0eefc46b0ac5d608f735c0eb
   - enabled: 1
+    path: Assets/Scenes/CS_4.unity
+    guid: 39a819ede721745be9a7e056736b8f79
+  - enabled: 1
     path: Assets/Scenes/ABANDONED_HOUSE.unity
     guid: ba45d3146a7774d79b1e706a74ab9c1a
   m_configObjects: {}

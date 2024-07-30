@@ -1032,6 +1032,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1189696904}
     m_Modifications:
+    - target: {fileID: 921255865620854102, guid: 850181f52919b47a19c4abfff5d0a4c5, type: 3}
+      propertyPath: m_SortingOrder
+      value: -800
+      objectReference: {fileID: 0}
     - target: {fileID: 1706505045081972580, guid: 850181f52919b47a19c4abfff5d0a4c5, type: 3}
       propertyPath: m_Name
       value: trash

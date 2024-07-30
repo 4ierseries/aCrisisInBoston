@@ -8,7 +8,6 @@ namespace DialogueSystem
     {
         protected IEnumerator WriteText(string input, TMP_Text textHolder)
         {
-
             for (int i = 0; i < input.Length; i++)
             {
                 textHolder.text += input[i];

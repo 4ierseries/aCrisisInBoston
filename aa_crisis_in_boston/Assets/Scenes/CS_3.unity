@@ -1211,8 +1211,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -79, y: 0}
-  m_SizeDelta: {x: 1200, y: 200}
+  m_AnchoredPosition: {x: -79, y: -37.32}
+  m_SizeDelta: {x: 1200, y: 274.64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1792300134
 MonoBehaviour:
@@ -1226,7 +1226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74cc9709c51f4011ba8636d6431cd558, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  input: what the sigma
+  input: What? Is this a prank? *call cuts*
 --- !u!114 &1792300135
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,35 +1,10 @@
 // this script is for the main character animations.
 // this is applied on the character prefab so won't need further updates (I think)
-/* using System;
-using UnityEngine;
-
-public class Gravity : MonoBehaviour
-{
-    private bool _isGrounded = false;
-
-    void Start()
-    {
-       
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown("s"))
-        {
-            
-        }
-    }
-    
-    
-}
-
-
-*/
 
 using System;
 using UnityEngine;
 
-public class Gravity : MonoBehaviour
+public class Movement : MonoBehaviour 
 {
     private float _horizontalInput;
     private float _moveSpeed = 5f;
@@ -85,8 +60,6 @@ public class Gravity : MonoBehaviour
         else
         {
             // Movement when upside down
-            Debug.Log("This is for moving upside down");
-
             // Invert the horizontal input for upside-down movement
             _rB.velocity = new Vector2((_horizontalInput * -1f) * _moveSpeed, _rB.velocity.y);
 
@@ -106,30 +79,28 @@ public class Gravity : MonoBehaviour
             transform.localScale = ls;
         }
     }
-    
 
-    // Flip method to flip the player upside down
     void Flip()
     {
-        _isUpsideDown = !_isUpsideDown; // Toggle the upside-down state
-        transform.Rotate(0f, 180f, 0f); // Rotate the player 180 degrees on the Y-axis
+        _isUpsideDown = !_isUpsideDown; // upside-down state
+        transform.Rotate(0f, 180f, 0f); // Rotate 180 degrees on the Y-axis
         Vector3 ls = transform.localScale;
-        ls.y *= -1f; // Invert the Y-scale to flip the player
+        ls.y *= -1f; // invert the y-scale
         transform.localScale = ls;
         
-        // Reverse the gravity direction
+        // reverse the gravity direction
         _rB.gravityScale *= -1;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        _isGrounded = true; // Set isGrounded to true when colliding with the ground
-        _animator.SetBool("isJumping", false); // Update animator state
+        _isGrounded = true; 
+        _animator.SetBool("isJumping", false); 
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        _isGrounded = false; // Set isGrounded to false when leaving the ground
+        _isGrounded = false; 
     }
 }
 

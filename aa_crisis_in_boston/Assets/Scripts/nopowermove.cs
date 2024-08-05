@@ -3,7 +3,7 @@
 using System;
 using UnityEngine;
 
-public class PoweredUpMovement : MonoBehaviour 
+public class nopowermove : MonoBehaviour 
 {
     // MOVEMENT VARIABLES
     private float _horizontalInput;
@@ -16,19 +16,12 @@ public class PoweredUpMovement : MonoBehaviour
     private Rigidbody2D _rB;
     private Animator _animator;
     private BoxCollider2D _bC;
-    
-    // REFERENCING THE POWERUP / BLOXY COLA & ITS COMPONENTS
-    public GameObject PowerUp; // this will hold the bloxy cola prefab
-    private BoxCollider2D CollideCola;
-    
-    private bool _isUpsideDown = false; // if the player is currently upside down
-    private bool hasPowerUp = false; // if the player has the power up
 
-    private bool canPickup = false; // indicates if the user is near the power up
+    private bool _isUpsideDown = false; // if the player is currently upside down
+
     
     void Start()
     {
-        CollideCola = PowerUp.GetComponent<BoxCollider2D>(); // this the powerup
         _bC = GetComponent<BoxCollider2D>(); // this is the character
         _rB = GetComponent<Rigidbody2D>(); // also the character but for movement
         _animator = GetComponent<Animator>(); // animations handler
@@ -40,7 +33,6 @@ public class PoweredUpMovement : MonoBehaviour
         _animator.SetBool("isWalking", Math.Abs(_horizontalInput) > 0.1f);
         
         // this checks if the user can pick up the power up
-        if (CollideCola.bounds.Intersects(_bC.bounds)) { canPickup = true; }
         
         // movement sprite flipping setup
         _horizontalInput = Input.GetAxis("Horizontal");
@@ -50,10 +42,8 @@ public class PoweredUpMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && _isGrounded) { Jump(); }
         
         // allow the user to pick the powerup & indicate they did
-        if (canPickup && Input.GetKeyDown(KeyCode.E)) { PoweredUp(); } 
         
         // flips the character if they took their powerup
-        if (hasPowerUp && Input.GetKeyDown(KeyCode.F)) { Flip(); } 
     }
 
     private void FixedUpdate()
@@ -93,32 +83,6 @@ public class PoweredUpMovement : MonoBehaviour
         _rB.velocity = new Vector2(_rB.velocity.x, _jumpPower * (_isUpsideDown ? -1 : 1));
         _isGrounded = false;
         _animator.SetBool("isJumping", !_isGrounded);
-    }
-
-    void PoweredUp()
-    { // indicate that the user has picked up the power up & set it off
-        hasPowerUp = true;
-        Debug.Log("Picked up! Can now flip");
-        PowerUp.SetActive(false);
-    }
-
-    void Flip()
-    { // flips the user upside down
-        if (hasPowerUp == true)
-        {
-            _isUpsideDown = !_isUpsideDown; // upside-down state
-            transform.Rotate(0f, 180f, 0f); // Rotate 180 degrees on the Y-axis
-            Vector3 ls = transform.localScale;
-            ls.y *= -1f; // invert the y-scale
-            transform.localScale = ls;
-        
-            // reverse the gravity direction
-            _rB.gravityScale *= -1;
-        }
-        else
-        {
-            Debug.Log("get cola first");
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

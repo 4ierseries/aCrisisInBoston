@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ABANDONED_HOUSE.unity
     guid: ba45d3146a7774d79b1e706a74ab9c1a
+  - enabled: 1
+    path: Assets/Scenes/GameOverScene.unity
+    guid: 7191be5cd108841cda27d3c740032a2a
   m_configObjects: {}

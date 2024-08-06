@@ -1,7 +1,11 @@
 // this script is for the main character animations.
 // this is applied on the character prefab so won't need further updates (I think)
 using System;
+using Cinemachine.Utility;
 using UnityEngine;
+using System.Collections; // For IEnumerator and coroutines
+using UnityEngine.SceneManagement;
+
 
 public class PoweredUpMovement : MonoBehaviour 
 {
@@ -9,8 +13,27 @@ public class PoweredUpMovement : MonoBehaviour
     private float _horizontalInput;
     private float _moveSpeed = 5f;
     private bool _isFacingRight = true;
-    private float _jumpPower = 5f;
+    private float _jumpPower = 6f;
     private bool _isGrounded = false;
+    
+    public GameObject spikes;
+    private PolygonCollider2D touch_spikes;
+    
+    
+    public GameObject key1;
+    private BoxCollider2D key11;
+    
+    public GameObject key2;
+    private BoxCollider2D key22;
+    
+    public GameObject key3;
+    private BoxCollider2D key33;
+    
+    public GameObject key4;
+    private BoxCollider2D key44;
+    
+    public GameObject key5;
+    private BoxCollider2D key55;
     
     // REFERENCING COMPONENTS OF THE CHARACTER
     private Rigidbody2D _rB;
@@ -32,6 +55,14 @@ public class PoweredUpMovement : MonoBehaviour
         _bC = GetComponent<BoxCollider2D>(); // this is the character
         _rB = GetComponent<Rigidbody2D>(); // also the character but for movement
         _animator = GetComponent<Animator>(); // animations handler
+        touch_spikes = spikes.GetComponent<PolygonCollider2D>();
+        
+        key11 = key1.GetComponent<BoxCollider2D>();
+        key22 = key2.GetComponent<BoxCollider2D>();
+        key33 = key3.GetComponent<BoxCollider2D>();
+        key44 = key4.GetComponent<BoxCollider2D>();
+        key55 = key5.GetComponent<BoxCollider2D>();
+        
     }
 
     void Update()
@@ -41,6 +72,36 @@ public class PoweredUpMovement : MonoBehaviour
         
         // this checks if the user can pick up the power up
         if (CollideCola.bounds.Intersects(_bC.bounds)) { canPickup = true; }
+
+        if (touch_spikes.bounds.Intersects(_bC.bounds))
+        {
+            StartCoroutine(WaitOneSecond()); SceneManager.LoadScene("GameOverScene");
+        }
+
+        if ((key11.bounds.Intersects(_bC.bounds)) || (key22.bounds.Intersects(_bC.bounds)))
+        {
+            key1.SetActive(false);
+        }
+        
+        if ((key22.bounds.Intersects(_bC.bounds)) || (key22.bounds.Intersects(_bC.bounds)))
+        {
+            key2.SetActive(false);
+        }
+        
+        if ((key33.bounds.Intersects(_bC.bounds)) || (key22.bounds.Intersects(_bC.bounds)))
+        {
+            key3.SetActive(false);
+        }
+        
+        if ((key44.bounds.Intersects(_bC.bounds)) || (key22.bounds.Intersects(_bC.bounds)))
+        {
+            key4.SetActive(false);
+        }
+        
+        if ((key55.bounds.Intersects(_bC.bounds)) || (key22.bounds.Intersects(_bC.bounds)))
+        {
+            key5.SetActive(false);
+        }
         
         // movement sprite flipping setup
         _horizontalInput = Input.GetAxis("Horizontal");
@@ -131,5 +192,11 @@ public class PoweredUpMovement : MonoBehaviour
     {
         _isGrounded = false; 
     }
+    
+    protected IEnumerator WaitOneSecond()
+    {
+        yield return new WaitForSeconds(1);
+    }
+
 }
 

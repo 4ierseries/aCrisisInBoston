@@ -20,21 +20,6 @@ public class PoweredUpMovement : MonoBehaviour
     private PolygonCollider2D touch_spikes;
     
     
-    public GameObject key1;
-    private BoxCollider2D key11;
-    
-    public GameObject key2;
-    private BoxCollider2D key22;
-    
-    public GameObject key3;
-    private BoxCollider2D key33;
-    
-    public GameObject key4;
-    private BoxCollider2D key44;
-    
-    public GameObject key5;
-    private BoxCollider2D key55;
-    
     // REFERENCING COMPONENTS OF THE CHARACTER
     private Rigidbody2D _rB;
     private Animator _animator;
@@ -48,6 +33,9 @@ public class PoweredUpMovement : MonoBehaviour
     private bool hasPowerUp = false; // if the player has the power up
 
     private bool canPickup = false; // indicates if the user is near the power up
+
+    public GameObject key;
+    private BoxCollider2D key_boxCollider;
     
     void Start()
     {
@@ -56,13 +44,8 @@ public class PoweredUpMovement : MonoBehaviour
         _rB = GetComponent<Rigidbody2D>(); // also the character but for movement
         _animator = GetComponent<Animator>(); // animations handler
         touch_spikes = spikes.GetComponent<PolygonCollider2D>();
-        
-        key11 = key1.GetComponent<BoxCollider2D>();
-        key22 = key2.GetComponent<BoxCollider2D>();
-        key33 = key3.GetComponent<BoxCollider2D>();
-        key44 = key4.GetComponent<BoxCollider2D>();
-        key55 = key5.GetComponent<BoxCollider2D>();
-        
+
+        key_boxCollider = key.GetComponent<BoxCollider2D>(); // the key:(
     }
 
     void Update()
@@ -71,36 +54,9 @@ public class PoweredUpMovement : MonoBehaviour
         _animator.SetBool("isWalking", Math.Abs(_horizontalInput) > 0.1f);
         
         // this checks if the user can pick up the power up
-        if (CollideCola.bounds.Intersects(_bC.bounds)) { canPickup = true; }
-
-        if (touch_spikes.bounds.Intersects(_bC.bounds))
+        if (CollideCola.bounds.Intersects(_bC.bounds))
         {
-            StartCoroutine(WaitOneSecond()); SceneManager.LoadScene("GameOverScene");
-        }
-
-        if ((key11.bounds.Intersects(_bC.bounds)) || (key22.bounds.Intersects(_bC.bounds)))
-        {
-            key1.SetActive(false);
-        }
-        
-        if ((key22.bounds.Intersects(_bC.bounds)) || (key22.bounds.Intersects(_bC.bounds)))
-        {
-            key2.SetActive(false);
-        }
-        
-        if ((key33.bounds.Intersects(_bC.bounds)) || (key22.bounds.Intersects(_bC.bounds)))
-        {
-            key3.SetActive(false);
-        }
-        
-        if ((key44.bounds.Intersects(_bC.bounds)) || (key22.bounds.Intersects(_bC.bounds)))
-        {
-            key4.SetActive(false);
-        }
-        
-        if ((key55.bounds.Intersects(_bC.bounds)) || (key22.bounds.Intersects(_bC.bounds)))
-        {
-            key5.SetActive(false);
+            canPickup = true;
         }
         
         // movement sprite flipping setup
@@ -108,13 +64,30 @@ public class PoweredUpMovement : MonoBehaviour
         FlipSprite();
         
         // Jumping 
-        if (Input.GetButtonDown("Jump") && _isGrounded) { Jump(); }
+        if (Input.GetButtonDown("Jump") && _isGrounded)
+        {
+            Jump();
+        }
         
         // allow the user to pick the powerup & indicate they did
-        if (canPickup && Input.GetKeyDown(KeyCode.E)) { PoweredUp(); } 
+        if (canPickup && Input.GetKeyDown(KeyCode.E))
+        {
+            PoweredUp();
+        } 
         
         // flips the character if they took their powerup
-        if (hasPowerUp && Input.GetKeyDown(KeyCode.F)) { Flip(); } 
+        if (hasPowerUp && Input.GetKeyDown(KeyCode.F))
+        {
+            Flip();
+        } 
+        
+        die();
+
+        if (_bC.bounds.Intersects(key_boxCollider.bounds))
+        {
+            CollectKey();
+        }
+        
     }
 
     private void FixedUpdate()
@@ -192,11 +165,23 @@ public class PoweredUpMovement : MonoBehaviour
     {
         _isGrounded = false; 
     }
-    
-    protected IEnumerator WaitOneSecond()
+
+    void die()
     {
-        yield return new WaitForSeconds(1);
+        if (_bC.bounds.Intersects(touch_spikes.bounds))
+        {
+            SceneManager.LoadScene("GameOverScene");
+        }
     }
 
+
+    private int collected = 0;
+    void CollectKey()
+    {
+        key.SetActive(false);
+        collected = collected + 1;
+        Debug.Log("collected " + collected + " keys");
+    }
+    
 }
 

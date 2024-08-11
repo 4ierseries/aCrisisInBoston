@@ -1856,7 +1856,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f085ace8f1b44d02a7ca602d6f26ea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  input: yaps
+  input: This is the leader of the chrome hearts mafia. We have your brother. Bring
+    us your grandmother's necklace from her safe. Or else...
 --- !u!1 &1911840748
 GameObject:
   m_ObjectHideFlags: 0

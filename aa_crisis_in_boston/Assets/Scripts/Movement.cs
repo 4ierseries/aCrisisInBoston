@@ -1,11 +1,7 @@
-// this script is for the main character animations.
-// this is applied on the character prefab so won't need further updates (I think)
 using System;
-using Cinemachine.Utility;
 using UnityEngine;
 using System.Collections; // For IEnumerator and coroutines
 using UnityEngine.SceneManagement;
-
 
 public class PoweredUpMovement : MonoBehaviour 
 {
@@ -17,8 +13,10 @@ public class PoweredUpMovement : MonoBehaviour
     private bool _isGrounded = false;
     
     public GameObject spikes;
-    private PolygonCollider2D touch_spikes;
+    private BoxCollider2D touch_spikes;
     
+    public GameObject safe; // Reference to the safe GameObject with BoxCollider2D
+    private BoxCollider2D safe_boxCollider;
     
     // REFERENCING COMPONENTS OF THE CHARACTER
     private Rigidbody2D _rB;
@@ -34,18 +32,31 @@ public class PoweredUpMovement : MonoBehaviour
 
     private bool canPickup = false; // indicates if the user is near the power up
 
-    public GameObject key;
-    private BoxCollider2D key_boxCollider;
-    
+    public GameObject[] keys; // Array of key GameObjects
+    private BoxCollider2D[] key_colliders; // Array of key colliders
+
+    private int collectedKeys = 0; // Number of collected keys
+    private const int totalKeys = 3; // Total number of keys required to win
+
+    private Vector3 startPosition = new Vector3(-20.21f, -15.33f, 0f); // Start position
+
     void Start()
     {
-        CollideCola = PowerUp.GetComponent<BoxCollider2D>(); // this the powerup
+        CollideCola = PowerUp.GetComponent<BoxCollider2D>(); // this is the powerup
         _bC = GetComponent<BoxCollider2D>(); // this is the character
         _rB = GetComponent<Rigidbody2D>(); // also the character but for movement
         _animator = GetComponent<Animator>(); // animations handler
-        touch_spikes = spikes.GetComponent<PolygonCollider2D>();
+        touch_spikes = spikes.GetComponent<BoxCollider2D>(); // Changed to BoxCollider2D
 
-        key_boxCollider = key.GetComponent<BoxCollider2D>(); // the key:(
+        // Initialize key colliders
+        key_colliders = new BoxCollider2D[keys.Length];
+        for (int i = 0; i < keys.Length; i++)
+        {
+            key_colliders[i] = keys[i].GetComponent<BoxCollider2D>();
+            keys[i].SetActive(true); // Ensure all keys are active at the start
+        }
+
+        safe_boxCollider = safe.GetComponent<BoxCollider2D>(); // the safe
     }
 
     void Update()
@@ -83,11 +94,21 @@ public class PoweredUpMovement : MonoBehaviour
         
         die();
 
-        if (_bC.bounds.Intersects(key_boxCollider.bounds))
+        // Check for key collection
+        for (int i = 0; i < key_colliders.Length; i++)
         {
-            CollectKey();
+            if (_bC.bounds.Intersects(key_colliders[i].bounds))
+            {
+                CollectKey(i);
+                break; // Exit loop after collecting a key
+            }
         }
-        
+
+        // Check if all keys are collected and if the player touches the safe
+        if (collectedKeys >= totalKeys && _bC.bounds.Intersects(safe_boxCollider.bounds))
+        {
+            SceneManager.LoadScene("GameCompleteScene"); // Or any scene for game completion
+        }
     }
 
     private void FixedUpdate()
@@ -151,7 +172,7 @@ public class PoweredUpMovement : MonoBehaviour
         }
         else
         {
-            Debug.Log("get cola first");
+            Debug.Log("Get cola first");
         }
     }
 
@@ -170,18 +191,32 @@ public class PoweredUpMovement : MonoBehaviour
     {
         if (_bC.bounds.Intersects(touch_spikes.bounds))
         {
-            SceneManager.LoadScene("GameOverScene");
+            // Reset the player's position to the start position
+            transform.position = startPosition;
+
+            // Reset the player's velocity to prevent them from getting stuck
+            _rB.velocity = Vector2.zero;
+
+            // Re-enable gravity in case the player was upside down
+            if (_isUpsideDown)
+            {
+                _rB.gravityScale *= -1;
+                _isUpsideDown = false;
+
+                // Reset player rotation and scale to the normal state
+                transform.rotation = Quaternion.identity;
+                Vector3 ls = transform.localScale;
+                ls.y = Mathf.Abs(ls.y); // Ensure the y-scale is positive
+                transform.localScale = ls;
+            }
         }
     }
 
-
-    private int collected = 0;
-    void CollectKey()
+    void CollectKey(int index)
     {
-        key.SetActive(false);
-        collected = collected + 1;
-        Debug.Log("collected " + collected + " keys");
+        // Disable the collected key GameObject
+        keys[index].SetActive(false);
+        collectedKeys += 1;
+        Debug.Log("Collected " + collectedKeys + " keys");
     }
-    
 }
-

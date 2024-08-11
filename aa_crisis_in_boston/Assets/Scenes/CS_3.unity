@@ -1856,7 +1856,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f085ace8f1b44d02a7ca602d6f26ea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  input: ??? *Call cuts*
+  input: Are you for real?? *Call cuts*
 --- !u!1 &1911840748
 GameObject:
   m_ObjectHideFlags: 0

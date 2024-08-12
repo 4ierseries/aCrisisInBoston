@@ -904,11 +904,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4542974942122409601, guid: 9d975d8bd684c4dff97499c6b2b50d43, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -44.96
+      value: -46.06
       objectReference: {fileID: 0}
     - target: {fileID: 4542974942122409601, guid: 9d975d8bd684c4dff97499c6b2b50d43, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.44
+      value: -8.67
       objectReference: {fileID: 0}
     - target: {fileID: 4542974942122409601, guid: 9d975d8bd684c4dff97499c6b2b50d43, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2033,7 +2033,7 @@ GameObject:
   - component: {fileID: 1108809884}
   - component: {fileID: 1108809883}
   m_Layer: 0
-  m_Name: Group 27
+  m_Name: ObjectiveSign
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3604,11 +3604,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693029512926744555, guid: 05f608af008d6416b89124b51f94689c, type: 3}
       propertyPath: m_LocalScale.x
-      value: 13.782999
+      value: 13.92772
       objectReference: {fileID: 0}
     - target: {fileID: 2693029512926744555, guid: 05f608af008d6416b89124b51f94689c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -30.7788
+      value: -30.9866
       objectReference: {fileID: 0}
     - target: {fileID: 2693029512926744555, guid: 05f608af008d6416b89124b51f94689c, type: 3}
       propertyPath: m_LocalPosition.y

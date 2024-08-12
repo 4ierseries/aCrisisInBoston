@@ -12,11 +12,25 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
     }
-    void Update()
+
+    //This method gets called on the PlayButton when the player clicks on it.
+    public void StartGame()
     {
-        if (Input.GetKeyDown("z"))
-        {
-            LoadScene(_SceneName);
-        }
+        LoadScene(_SceneName);
+    }
+
+
+    public void Quit()
+    {
+        //If you're in the Unity Editor and click on Quit,
+        //Exit out of Play Mode.
+        #if UNITY_EDITOR
+
+        UnityEditor.EditorApplication.isPlaying = false;
+
+        //If you're in a Build and click on Quit,
+        //Exit out of the Game (Program).
+        #endif
+                Application.Quit();
     }
 }

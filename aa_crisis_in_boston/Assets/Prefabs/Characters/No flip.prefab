@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 3900934866617571547}
   m_Layer: 0
   m_Name: No flip
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -205,7 +205,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4957cb0ee3eeb432aa32d8740d2e805f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spikes: {fileID: 0}
+  safe: {fileID: 0}
   PowerUp: {fileID: 0}
+  keys: []
 --- !u!95 &2584689175322732115
 Animator:
   serializedVersion: 5

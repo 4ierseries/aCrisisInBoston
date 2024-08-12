@@ -10,15 +10,18 @@
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections; // For IEnumerator and coroutines
+using System.Collections;
+using System.Transactions; // For IEnumerator and coroutines
 
 public class SwitchToGame : MonoBehaviour
 {
 
     private bool starter = false; // is set to true after the 3 seconds pass
     public GameObject canvasControl;
+    private GameObject player;
     void Start()
     {
+        player = GameObject.Find("Player");
         starter = false;
         
         // Hide the Canvas initially 
@@ -34,7 +37,9 @@ public class SwitchToGame : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown("p") && (canvasControl != null))
+        //If the player presses E while the Objective UI is active (visible)
+        //Load the first cutscene
+        if (Input.GetKeyDown(KeyCode.E) && (canvasControl.activeSelf == true) && player.GetComponent<CutsceneMovement>().pickedUp == true)
         {
             StopAllCoroutines();
             StartCoroutine(WaitOneSecond());
